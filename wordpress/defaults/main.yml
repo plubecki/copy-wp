@@ -1,0 +1,43 @@
+---
+##[Do zmiany]
+db_host: 172.31.25.86
+telegraf_influx_url: http://172.31.17.254:8086
+
+##[influx]
+metric_store_ip: 127.0.0.1
+rpm_influxdb: https://dl.influxdata.com/influxdb/releases/influxdb-1.5.2.x86_64.rpm
+
+##[grafana]
+grafana_url: https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana-5.3.4-1.x86_64.rpm
+
+##[telegraf]
+telegraf_url: https://dl.influxdata.com/telegraf/releases/telegraf-1.8.3-1.x86_64.rpm
+telegraf_influx_url: http://localhost:8086
+telegraf_influx_database_name: "metrics"
+telegraf_influx_database_user: "metrics"
+telegraf_influx_database_password: "metrics"
+telegraf_hostname: "{{ansible_hostname}}"
+
+##[stats_nodes]
+metrics_database_name: "metrics"
+metrics_database_password: "metrics"
+metrics_database_user: "metrics"
+datasource_name: "my-influx"
+grafana_http_port: 8080
+
+##[db vars]
+blog_path: /var/www/
+database_name: adsk_baza
+database_user: bob
+database_password: ''
+database_host: 172.31.20.98 #zmienić na prywatny IP maszyny z bazą danych
+
+##[app]
+jar_location: /home/ec2-user/environment/187439/wordpress/roles/app-pp5/tasks/files/my-car-renta-spring/target/carrental-0.0.1-SNAPSHOT.jar 
+app_location: /opt/carrental/carrental.jar
+app_user: carrent
+apache_mod_stats_enabled: yes
+db_user: bob_user
+db_password: bob_user123
+db_name: bob_blog
+

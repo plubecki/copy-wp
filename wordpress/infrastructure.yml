@@ -1,0 +1,32 @@
+---
+    - hosts: web-java-app_nodes
+      become: yes
+      vars_files:
+        - defaults/main.yml
+      tasks:
+        - include_tasks: roles/web/tasks/os-dependencies.yml
+        - include_tasks: roles/web/tasks/php-config.yml
+        - include_tasks: roles/telegraf/tasks/install-telegraf.yml
+        - include_tasks: roles/app-pp5/tasks/config-app.yml
+    - hosts: db_nodes
+      become: yes
+      vars_files:
+        - defaults/main.yml
+      tasks:
+        - include_tasks: roles/web/tasks/os-dependencies.yml
+    - hosts: stats_nodes
+      become: yes
+      vars_files:
+        - defaults/main.yml   
+      tasks:
+        - include_tasks: roles/influxdb/tasks/install-influxdb.yml
+        - include_tasks: roles/grafana/tasks/install-grafana.yml
+        - include_tasks: roles/grafana/tasks/create-datasource-grafana.yml
+        - include_tasks: roles/grafana/tasks/create-dashboard.yml
+    - hosts: nginx-proxy_nodes
+      become: yes
+      tasks:
+        - include_tasks: roles/nginx/tasks/enable-epel-rep.yml
+        - include_tasks: roles/nginx/tasks/install-nginx.yml
+        - include_tasks: roles/nginx/tasks/config-nginx.yml
+        - include_tasks: roles/nginx/tasks/config-ssl.yml 

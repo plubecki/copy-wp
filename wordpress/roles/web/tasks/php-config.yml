@@ -1,0 +1,5 @@
+---
+    - name: "Copy config"
+      template:
+        src: files/db_config.php
+        dest: /var/www/db_config.php
